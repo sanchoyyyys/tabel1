@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Табель посещаемости — ТЭСИС-26, сентябрь 2026</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    line-height: 1.35;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  h1 { font-size: 20px; text-align: center; margin: 0 0 4px; font-weight: bold; }
+  h2 { font-size: 17px; margin: 22px 0 10px; font-weight: bold; }
+  h3 { font-size: 15px; margin: 16px 0 8px; font-weight: bold; }
+  .header-org { text-align: center; font-size: 13px; margin-bottom: 2px; }
+  .header-org strong { font-size: 14px; }
+  .doc-title { text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0 2px; }
+  .doc-sub { text-align: center; font-size: 13px; margin-bottom: 14px; }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin: 6px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta-row .item { flex: 1 1 45%; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    margin: 8px 0 14px;
+    table-layout: fixed;
+  }
+  th, td {
+    border: 1px solid #333;
+    padding: 2px 3px;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  th {
+    background: #e8eef7;
+    font-weight: bold;
+    font-size: 11px;
+  }
+  td.name { text-align: left; padding-left: 4px; white-space: normal; }
+  .mark-n { color: #b00020; font-weight: bold; }
+  .mark-b { color: #0b5394; font-weight: bold; }
+  .mark-x { color: #888; font-weight: bold; }
+  .mark-dash { color: #666; }
+  .mark-u { color: #6a1b9a; font-weight: bold; }
+  .total-cell { background: #fff3cd; font-weight: bold; }
+  .order-row td {
+    background: #f0f0f0;
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+  .caption-note {
+    font-size: 12px;
+    margin: 8px 0;
+    padding: 8px 10px;
+    background: #fff8e1;
+    border-left: 4px solid #f0ad4e;
+  }
+  .signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 26px;
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .signatures .sig { flex: 1 1 45%; }
+  .signatures .line {
+    display: inline-block;
+    min-width: 140px;
+    border-bottom: 1px solid #333;
+    margin: 0 6px;
+  }
+  .legend {
+    font-size: 12px;
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: #eef7ee;
+    border-left: 4px solid #4caf50;
+  }
+  .legend strong { display: inline-block; margin-right: 6px; }
+  .legend span { display: inline-block; margin-right: 14px; }
+  .no-print { margin: 14px 0; }
+  .no-print button {
+    font-size: 13px;
+    padding: 6px 14px;
+    margin-right: 8px;
+    cursor: pointer;
+    border: 1px solid #333;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+  .no-print button:hover { background: #e0e0e0; }
+  .small { font-size: 11px; color: #555; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .container { box-shadow: none; padding: 0; max-width: 100%; }
+    .no-print { display: none; }
+    table { font-size: 10px; }
+    th { font-size: 9px; }
+  }
+  @media (max-width: 900px) {
+    table { font-size: 10px; }
+    th { font-size: 9px; }
+    th, td { padding: 1px 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ===== ЗАГОЛОВОК ===== -->
+  <div class="header-org">
+    Государственное бюджетное профессиональное образовательное учреждение Московской области<br>
+    <strong>«Люберецкий техникум имени героя Советского Союза, лётчика-космонавта Ю.А. Гагарина»</strong>
+  </div>
+
+  <div class="doc-title">СВОДНЫЙ ЖУРНАЛ УЧЁТА ПОСЕЩАЕМОСТИ УЧЕБНЫХ ЗАНЯТИЙ</div>
+  <div class="doc-sub">группы № ТЭСИС-26 09.02.12 Техническая эксплуатация и сопровождение информационных систем</div>
+
+  <div class="meta-row">
+    <div class="item"><strong>Месяц:</strong> сентябрь 2026</div>
+    <div class="item"><strong>Куратор группы:</strong> Жирнова Юлия Витальевна</div>
+  </div>
+
+  <div class="no-print">
+    <button onclick="window.print()">🖨 Печать / Сохранить PDF</button>
+    <button onclick="downloadHTML()">💾 Скачать HTML</button>
+    <button onclick="downloadCSV()">📊 Скачать CSV (Excel)</button>
+  </div>
+
+  <!-- ===== СВОДНЫЙ ЖУРНАЛ ===== -->
+  <h2>1. Сводный журнал посещаемости</h2>
+
+  <table id="journalTable">
+    <thead>
+      <tr>
+        <th rowspan="2" style="width:28px;">№</th>
+        <th rowspan="2" style="width:150px;">ФИО студента</th>
+        <th colspan="22">Сентябрь 2026 / дата</th>
+        <th rowspan="2" style="width:38px;">Всего</th>
+      </tr>
+      <tr>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th>
+        <th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+        <th>28</th><th>29</th><th>30</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Строки будут заполнены JS -->
+    </tbody>
+  </table>
+
+  <div class="caption-note">
+    <strong>Примечания:</strong><br>
+    <span class="mark-x">х</span> — Мордвинов В.С. зачислен приказом №127-у от 14.09.2026; Зайридинов И.Ф. зачислен приказом №136-у от 24.09.2026.<br>
+    <span class="mark-dash">−</span> — Саадуллаев Р.Ш. отчислен приказом №128-у от 14.09.2026; Нишонов Р.Г. переведён приказом №133-у от 16.09.2026.<br>
+    Махмутов Н.Р. и Селиванов А.А. — члены семьи участника СВО.
+  </div>
+
+  <!-- ===== ТАБЕЛЬ ЧАСТИЧНОЙ КОМПЕНСАЦИИ ===== -->
+  <h2>2. Табель «О частичной компенсации стоимости питания» (13 руб. 00 коп. на один день)</h2>
+  <div class="doc-sub" style="text-align:left; font-size:12px;">
+    ГРУППА № ТЭСИС-26: 09.02.12 Техническая эксплуатация и сопровождение информационных систем
+  </div>
+
+  <table id="compTable">
+    <thead>
+      <tr>
+        <th style="width:28px;">№</th>
+        <th style="width:200px;">Фамилия, имя, отчество</th>
+        <th style="width:70px;">Учебные дни</th>
+        <th style="width:70px;">Больничный лист</th>
+        <th style="width:60px;">Практика</th>
+        <th style="width:55px;">Итого</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="signatures">
+    <div class="sig">
+      Куратор группы <span class="line"></span> Жирнова Ю.В.<br>
+      <span class="small">(подпись) (ФИО куратора)</span>
+    </div>
+    <div class="sig">
+      Ответственный исполнитель по корпусу <span class="line"></span> Капранова А.В.<br>
+      <span class="small">(подпись) (ФИО ответственного исполнителя)</span>
+    </div>
+  </div>
+
+  <!-- ===== ТАБЕЛЬ СВО ===== -->
+  <h2>3. Табель социальной поддержки членов семьи участника СВО</h2>
+  <div class="doc-sub" style="text-align:left; font-size:12px;">
+    ГРУППА № ТЭСИС-26: 09.02.12 Техническая эксплуатация и сопровождение информационных систем
+  </div>
+
+  <table id="svoTable">
+    <thead>
+      <tr>
+        <th style="width:28px;">№</th>
+        <th style="width:200px;">Фамилия, имя, отчество</th>
+        <th style="width:70px;">Учебные дни</th>
+        <th style="width:70px;">Больничный лист</th>
+        <th style="width:60px;">Практика</th>
+        <th style="width:55px;">Итого</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="legend">
+    <strong>Условные обозначения:</strong>
+    <span><span class="mark-n">н</span> — отсутствовал (неуважительная причина)</span>
+    <span><span class="mark-b">б</span> — больничный лист</span>
+    <span><span class="mark-u">у</span> — уважительная причина (не болезнь)</span>
+    <span><span class="mark-x">х</span> — зачислен позже</span>
+    <span><span class="mark-dash">−</span> — отчислен/переведён</span>
+    <span>пусто — присутствовал</span>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   ДАННЫЕ (из сводного журнала DOCX)
+   ============================================================ */
+
+const DATES = [1,2,3,4,7,8,9,10,11,14,15,16,17,18,21,22,23,24,25,28,29,30];
+const TOTAL_DAYS = 22; // учебных дней в сентябре 2026 по журналу
+
+// marks: массив длиной TOTAL_DAYS, значения: "" | "н" | "б" | "у" | "х" | "-"
+// Для удобства: строки в журнале идут подряд, поэтому заполняем по порядку дат.
+// Если отметок меньше — остальные дни считаем присутствием ("").
+
+const STUDENTS = [
+  { n:1,  name:"Алексеев Евгений Евгеньевич",        marks:["н","н","н","н","н","","","","","","","","","","","","","","","","",""], journalTotal:17, svo:false },
+  { n:2,  name:"Алфимцев Матвей Игоревич",           marks:["н","н","н","н","н","н","н","","","","","","","","","","","","","","",""], journalTotal:15, svo:false },
+  { n:3,  name:"Багдасарьян Михаил Каренович",       marks:["н","н","н","н","н","","","","","","","","","","","","","","","","",""], journalTotal:17, svo:false },
+  { n:4,  name:"Батурин Александр Егорович",         marks:["н","н","н","н","н","н","н","н","","","","","","","","","","","","","",""], journalTotal:14, svo:false },
+  { n:5,  name:"Ванин Артем Александрович",          marks:["н","","","","","","","","","","","","","","","","","","","","",""], journalTotal:21, svo:false },
+  { n:6,  name:"Васильева Виктория Анатольевна",     marks:["н","н","н","","","","","","","","","","","","","","","","","","",""], journalTotal:19, svo:false },
+  { n:7,  name:"Давлатов Мухаммадали Бахруллоевич",  marks:["н","","","","","","","","","","","","","","","","","","","","",""], journalTotal:21, svo:false },
+  { n:8,  name:"Долгополов Ярослав Алексеевич",      marks:["","","","","","","","","","","","","","","","","","","","","",""], journalTotal:22, svo:false },
+  { n:9,  name:"Доломанова София Дмитриевна",        marks:["н","н","","","","","","","","","","","","","","","","","","","",""], journalTotal:20, svo:false },
+  { n:10, name:"Дубатовка Даниил Анатольевич",       marks:["н","","","","","","","","","","","","","","","","","","","","",""], journalTotal:21, svo:false },
+  { n:11, name:"Зайридинов Исламбек Фазилдинович",   marks:["х","х","х","х","х","х","х","х","х","х","х","х","х","х","х","х","х","н","н","н","н","н"], journalTotal:5, svo:false },
+  { n:12, name:"Захаров Никита Алексеевич",          marks:["н","н","н","н","н","н","","","","","","","","","","","","","","","",""], journalTotal:16, svo:false },
+  { n:13, name:"Золотов Александр Дмитриевич",       marks:["н","б","б","н","н","н","н","н","н","н","н","н","н","н","","","","","","","",""], journalTotal:10, svo:false },
+  { n:14, name:"Кабанов Семен Алексеевич",           marks:["н","н","","","","","","","","","","","","","","","","","","","",""], journalTotal:20, svo:false },
+  { n:15, name:"Калашников Сергей Сергеевич",        marks:["н","н","н","н","","","","","","","","","","","","","","","","","",""], journalTotal:18, svo:false },
+  { n:16, name:"Кобин Артем Олегович",               marks:["н","н","н","б","б","б","б","б","н","н","н","н","","","","","","","","","",""], journalTotal:15, svo:false },
+  { n:17, name:"Махмутов Никита Ренатович",          marks:["н","н","","","","","","","","","","","","","","","","","","","",""], journalTotal:20, svo:true },
+  { n:18, name:"Мордвинов Владислав Сергеевич",      marks:["х","х","х","х","х","х","х","х","х","","","","","","","","","","","","",""], journalTotal:13, svo:false, order:{no:"127-у", date:"14.09.2026", type:"enrolled"} },
+  { n:19, name:"Нишонов Рустам Гайратбекович",       marks:["-","-","-","-","-","-","-","-","-","-","-","","","","","","","","","","",""], journalTotal:11, svo:false, order:{no:"133-у", date:"16.09.2026", type:"transferred"} },
+  { n:20, name:"Поздеев Виктор Владимирович",        marks:["н","н","н","н","н","н","","","","","","","","","","","","","","","",""], journalTotal:16, svo:false },
+  { n:21, name:"Саадуллаев Рамазан Шамильевич",      marks:["н","н","н","н","н","н","н","н","-","-","-","-","-","-","-","-","-","-","-","-","-","-"], journalTotal:0, svo:false, order:{no:"128-у", date:"14.09.2026", type:"expelled"} },
+  { n:22, name:"Саркориев Салам Саркориевич",        marks:["н","н","н","н","н","н","","","","","","","","","","","","","","","",""], journalTotal:16, svo:false },
+  { n:23, name:"Селиванов Артем Александрович",      marks:["н","н","н","н","н","н","н","н","н","н","н","н","н","н","н","н","н","н","н","","",""], journalTotal:3, svo:true },
+  { n:24, name:"Сухоруков Семен Алексеевич",         marks:["н","н","н","н","","","","","","","","","","","","","","","","","",""], journalTotal:18, svo:false },
+  { n:25, name:"Филинков Андрей Витальевич",         marks:["н","н","","","","","","","","","","","","","","","","","","","",""], journalTotal:20, svo:false },
+  { n:26, name:"Черников Андрей Алексеевич",         marks:["н","н","н","","","","","","","","","","","","","","","","","","",""], journalTotal:19, svo:false },
+  { n:27, name:"Юрченко Артем Витальевич",           marks:["н","н","б","б","б","б","б","б","","","","","","","","","","","","","",""], journalTotal:20, svo:false }
+];
+
+/* ============================================================
+   ЛОГИКА ПОДСЧЁТА
+   ============================================================ */
+
+function calcTotals(st) {
+  let study = 0, sick = 0, practice = 0;
+  for (const m of st.marks) {
+    if (m === "" ) study++;
+    else if (m === "б") sick++;
+    else if (m === "у") { /* уважительная — не входит в учебные дни */ }
+    // н, х, - — не входят
+  }
+  return { study, sick, practice, total: study + sick + practice };
+}
+
+/* ============================================================
+   РЕНДЕР СВОДНОГО ЖУРНАЛА
+   ============================================================ */
+
+function renderJournal() {
+  const tbody = document.querySelector("#journalTable tbody");
+  tbody.innerHTML = "";
+
+  STUDENTS.forEach(st => {
+    const tr = document.createElement("tr");
+
+    // Строка с приказом для отчисленных/переведённых — объединённая ячейка
+    if (st.order && (st.order.type === "expelled" || st.order.type === "transferred")) {
+      const label = st.order.type === "expelled"
+        ? `Отчисление приказ №${st.order.no} от ${st.order.date}`
+        : `Перевод приказ №${st.order.no} от ${st.order.date}`;
+      tr.className = "order-row";
+      tr.innerHTML = `
+        <td>${st.n}</td>
+        <td class="name">${st.name}</td>
+        <td colspan="${TOTAL_DAYS + 1}"><strong>${label}</strong></td>
+      `;
+      tbody.appendChild(tr);
+      return;
+    }
+
+    // Обычная строка
+    let html = `<td>${st.n}</td><td class="name">${st.name}</td>`;
+    st.marks.forEach((m, i) => {
+      let cls = "";
+      let txt = m;
+      if (m === "н") cls = "mark-n";
+      else if (m === "б") cls = "mark-b";
+      else if (m === "у") cls = "mark-u";
+      else if (m === "х") cls = "mark-x";
+      else if (m === "-") { cls = "mark-dash"; txt = "−"; }
+      html += `<td class="${cls}">${txt}</td>`;
+    });
+    // Столбец «Всего» — по журналу (как в образце)
+    html += `<td class="total-cell">${st.journalTotal}</td>`;
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ============================================================
+   РЕНДЕР ТАБЕЛЯ ЧАСТИЧНОЙ КОМПЕНСАЦИИ
+   ============================================================ */
+
+function renderCompTable() {
+  const tbody = document.querySelector("#compTable tbody");
+  tbody.innerHTML = "";
+
+  // Нумерация в табеле идёт подряд, без учёта пропущенных номеров журнала
+  let idx = 1;
+  STUDENTS.forEach(st => {
+    const tr = document.createElement("tr");
+
+    if (st.order && (st.order.type === "expelled" || st.order.type === "transferred")) {
+      const label = st.order.type === "expelled"
+        ? `Отчисление приказ №${st.order.no} от ${st.order.date}`
+        : `Перевод приказ №${st.order.no} от ${st.order.date}`;
+      tr.className = "order-row";
+      tr.innerHTML = `
+        <td>${idx++}</td>
+        <td class="name">${st.name}</td>
+        <td colspan="4"><strong>${label}</strong></td>
+      `;
+      tbody.appendChild(tr);
+      return;
+    }
+
+    const t = calcTotals(st);
+    // В образце для Золотова: учебные 8, больничный 2, итого 10
+    // Для Кобина: 10 + 5 = 15. Для Юрченко: 14 + 6 = 20.
+    // Проверяем: у Алексеева study=17, sick=0 → 17. Совпадает.
+    tr.innerHTML = `
+      <td>${idx++}</td>
+      <td class="name">${st.name}</td>
+      <td>${t.study || "-"}</td>
+      <td>${t.sick ? t.sick : "-"}</td>
+      <td>${t.practice ? t.practice : "-"}</td>
+      <td class="total-cell">${t.total}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ============================================================
+   РЕНДЕР ТАБЕЛЯ СВО
+   ============================================================ */
+
+function renderSvoTable() {
+  const tbody = document.querySelector("#svoTable tbody");
+  tbody.innerHTML = "";
+
+  const svoStudents = STUDENTS.filter(s => s.svo);
+  if (svoStudents.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6">Нет студентов категории СВО</td></tr>`;
+    return;
+  }
+
+  let idx = 1;
+  svoStudents.forEach(st => {
+    const tr = document.createElement("tr");
+    const t = calcTotals(st);
+    tr.innerHTML = `
+      <td>${idx++}</td>
+      <td class="name">${st.name}</td>
+      <td>${t.study || "-"}</td>
+      <td>${t.sick ? t.sick : "-"}</td>
+      <td>${t.practice ? t.practice : "-"}</td>
+      <td class="total-cell">${t.total}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ============================================================
+   ЭКСПОРТ
+   ============================================================ */
+
+function downloadHTML() {
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "tabel_TESIS-26_sentyabr_2026.html";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function downloadCSV() {
+  // CSV по табелю частичной компенсации
+  const rows = [];
+  rows.push(["№", "ФИО", "Учебные дни", "Больничный лист", "Практика", "Итого"]);
+  let idx = 1;
+  STUDENTS.forEach(st => {
+    if (st.order && (st.order.type === "expelled" || st.order.type === "transferred")) {
+      rows.push([idx++, st.name, "", "", "", ""]);
+      return;
+    }
+    const t = calcTotals(st);
+    rows.push([idx++, st.name, t.study || "-", t.sick || "-", t.practice || "-", t.total]);
+  });
+
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "tabel_TESIS-26_sentyabr_2026.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ============================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ============================================================ */
+
+renderJournal();
+renderCompTable();
+renderSvoTable();
+</script>
+</body>
+</html>
